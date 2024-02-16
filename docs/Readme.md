@@ -71,7 +71,7 @@ ethereum_sdk_demo/wallet_generate imports
 ## contract_deploy/main.go
 에러 처리 : ^0.4.24 => ^0.8.23
 ```
-snoopy_kr@MacBookPro contract_deploy % solc --abi ./store/Store.sol
+snoopy_kr@MacBookPro ethereum_sdk_demo % solc --abi ./contracts/Store.sol
 Error: Source file requires different compiler version (current compiler is 0.8.23+commit.f704f362.Darwin.appleclang) - note that nightly builds are considered to be strictly less than the released version
  --> Store.sol:1:1:
   |
@@ -81,7 +81,7 @@ Error: Source file requires different compiler version (current compiler is 0.8.
 
 에러 처리 : string _version => string memory _version
 ```
-snoopy_kr@MacBookPro contract_deploy % solc --abi ./store/Store.sol
+snoopy_kr@MacBookPro ethereum_sdk_demo % solc --abi ./contracts/Store.sol
 Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
 --> Store.sol
 
@@ -93,9 +93,9 @@ Error: Data location must be "storage" or "memory" for constructor parameter, bu
 ```
 
 ```bash
-snoopy_kr@MacBookPro contract_deploy % solc --abi ./store/Store.sol -o ./store
-snoopy_kr@MacBookPro contract_deploy % solc --bin ./store/Store.sol -o ./store
-snoopy_kr@MacBookPro contract_deploy % abigen --bin ./store/Store.bin --abi ./store/Store.abi --pkg store --out ./store/Store.go
+snoopy_kr@MacBookPro ethereum_sdk_demo % solc --abi ./contracts/Store.sol -o ./contracts
+snoopy_kr@MacBookPro ethereum_sdk_demo % solc --bin ./contracts/Store.sol -o ./contracts
+snoopy_kr@MacBookPro ethereum_sdk_demo % abigen --bin ./contracts/Store.bin --abi ./contracts/Store.abi --pkg store --out ./contracts/Store.go
 ```
 
 Etherscan에서 Gas 부족 에러
