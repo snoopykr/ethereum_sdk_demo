@@ -1,15 +1,15 @@
 package main
 
 import (
-	"ethereum_sdk_demo/dot_env"
 	"fmt"
 	"log"
 	"os"
 
+	store "ethereum_sdk_demo/contracts" // for demo
+	"ethereum_sdk_demo/dot_env"
+
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
-
-	store "ethereum_sdk_demo/contract_deploy/store" // for demo
 )
 
 func main() {

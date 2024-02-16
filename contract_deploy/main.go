@@ -3,17 +3,17 @@ package main
 import (
 	"context"
 	"crypto/ecdsa"
-	"ethereum_sdk_demo/dot_env"
 	"fmt"
 	"log"
 	"math/big"
 	"os"
 
+	store "ethereum_sdk_demo/contracts" // for demo
+	"ethereum_sdk_demo/dot_env"
+
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
-
-	store "ethereum_sdk_demo/contract_deploy/store" // for demo
 )
 
 func main() {

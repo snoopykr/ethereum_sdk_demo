@@ -3,10 +3,11 @@ package main
 import (
 	"context"
 	"encoding/hex"
-	"ethereum_sdk_demo/dot_env"
 	"fmt"
 	"log"
 	"os"
+
+	"ethereum_sdk_demo/dot_env"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
