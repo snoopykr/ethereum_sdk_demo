@@ -21,7 +21,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	account := common.HexToAddress(os.Getenv("ETHEREUM_ADDRESS"))
+	account := common.HexToAddress(os.Getenv("ETHEREUM_FROM_ADDRESS"))
 
 	// 현재 발란스
 	balance, err := client.BalanceAt(context.Background(), account, nil)
