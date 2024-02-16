@@ -27,8 +27,89 @@ ethereum_sdk_demo/wallet_generate imports
 ```
 
 ## transfer_eth/main.go
-실행은 정상적으로 이루어졌지만 전송이 되지 않음
+<strike>실행은 정상적으로 이루어졌지만 전송이 되지 않음</strike>
 
 ## transfer_token/main.go
-토큰이 없어서 실행을 못함.
+```
+0xa9059cbb
+0x000000000000000000000000fa9d10ae2052b5e23ae29304f326a625c5c03ee3
+0x00000000000000000000000000000000000000000000003635c9adc5dea00000
+2024/02/16 15:20:13 execution reverted
+```
 
+
+참조 : <https://medium.com/@blocktorch/shining-light-on-web3-engineering-execution-reverted-errors-cda02f7ae75e>
+
+## transaction_raw_create/main.go
+실행은 정상적으로 이루어졌지만 전송이 되지 않음
+
+```
+[0xc0000aede0]
+```
+
+컴파일 전 에러
+```go
+	// transfer_eth와 이부분만 틀림...
+	// 하지만 전송이 되지 않는다는 거...
+	ts := types.Transactions{signedTx}
+	fmt.Println(ts)
+	
+	// 에러 발생 부분.
+	// rawTxBytes := ts.GetRlp(0)
+	// rawTxHex := hex.EncodeToString(rawTxBytes)
+	//
+	// fmt.Printf(rawTxHex) // f86...772
+```
+
+## transaction_raw_send/main.go
+실행은 정상적으로 이루어졌지만 전송이 되지 않음
+
+```
+2024/02/16 15:42:41 invalid sender
+```
+
+## contract_deploy/main.go
+에러 처리 : ^0.4.24 => ^0.8.23
+```
+snoopy_kr@MacBookPro contract_deploy % solc --abi Store.sol
+Error: Source file requires different compiler version (current compiler is 0.8.23+commit.f704f362.Darwin.appleclang) - note that nightly builds are considered to be strictly less than the released version
+ --> Store.sol:1:1:
+  |
+1 | pragma solidity ^0.4.24;
+  | ^^^^^^^^^^^^^^^^^^^^^^^^
+```
+
+에러 처리 : string _version => string memory _version
+```
+snoopy_kr@MacBookPro contract_deploy % solc --abi Store.sol
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> Store.sol
+
+Error: Data location must be "storage" or "memory" for constructor parameter, but none was given.
+ --> Store.sol:9:15:
+  |
+9 |   constructor(string _version) public {
+  |               ^^^^^^^^^^^^^^^
+```
+
+```bash
+snoopy_kr@MacBookPro contract_deploy % solc --abi ./store/Store.sol -o ./store
+snoopy_kr@MacBookPro contract_deploy % solc --bin ./store/Store.sol -o ./store
+snoopy_kr@MacBookPro contract_deploy % abigen --bin ./store/Store.bin --abi ./store/Store.abi --pkg store --out ./store/Store.go
+```
+
+Etherscan에서 Gas 부족 에러
+```
+Warning! Error encountered during contract execution [contract creation code storage out of gas]
+```
+
+에러 처리 : 30000 => 3000000 (X 100)
+
+Etherscan : <https://sepolia.etherscan.io/tx/0xd0cb57e9e0f8d35300f492034fef3df9d5794731ce489d251ecf1cf863441367>
+```
+	auth := bind.NewKeyedTransactor(privateKey)
+	auth.Nonce = big.NewInt(int64(nonce))
+	auth.Value = big.NewInt(0)     // in wei
+	auth.GasLimit = uint64(3000000) // in units
+	auth.GasPrice = gasPrice
+```

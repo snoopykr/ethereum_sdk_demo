@@ -26,7 +26,7 @@ func main() {
 	}
 
 	// check smart contract address...
-	address := common.HexToAddress(os.Getenv("ETHEREUM_CONTRACT"))
+	address := common.HexToAddress(os.Getenv("ETHEREUM_TOKEN"))
 	bytecode, err := client.CodeAt(context.Background(), address, nil) // nil is latest block
 	if err != nil {
 		log.Fatal(err)
