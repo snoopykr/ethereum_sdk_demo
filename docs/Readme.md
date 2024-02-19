@@ -113,3 +113,49 @@ Etherscan : <https://sepolia.etherscan.io/tx/0xd0cb57e9e0f8d35300f492034fef3df9d
 	auth.GasLimit = uint64(3000000) // in units
 	auth.GasPrice = gasPrice
 ```
+
+## contract_read_erc20/main.go
+
+ERC20
+```
+snoopy_kr@MacBookPro ethereum_sdk_demo % solc --abi ./contracts_erc20/ERC20.sol -o ./contracts_erc20
+snoopy_kr@MacBookPro ethereum_sdk_demo % solc --bin ./contracts_erc20/ERC20.sol -o ./contracts_erc20
+snoopy_kr@MacBookPro ethereum_sdk_demo % abigen --bin ./contracts_erc20/ERC20.bin --abi ./contracts_erc20/ERC20.abi --pkg token --out ./contracts_erc20/erc20.go
+```
+
+## event_subscribe/main.go
+
+```
+2024/02/19 14:46:08 notifications not supported
+```
+
+## event_read/main.go
+version 차이 에러...
+```go
+        // Assignment count mismatch: 1 = 2
+		err := contractAbi.Unpack(&event, "ItemSet", vLog.Data)
+		if err != nil {
+			log.Fatal(err)
+		}
+```
+
+## event_read_erc20/main.go
+version 차이 에러...
+```go
+        // Assignment count mismatch: 1 = 2
+		err := contractAbi.Unpack(&event, "ItemSet", vLog.Data)
+		if err != nil {
+			log.Fatal(err)
+		}
+```
+
+
+## event_read_0xprotocol/main.go
+version 차이 에러...
+```go
+        // Assignment count mismatch: 1 = 2
+		err := contractAbi.Unpack(&event, "ItemSet", vLog.Data)
+		if err != nil {
+			log.Fatal(err)
+		}
+```
