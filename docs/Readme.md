@@ -159,3 +159,17 @@ version 차이 에러...
 			log.Fatal(err)
 		}
 ```
+
+## client_simulated/main.go
+```go
+	// Error 발생...
+	// 2024/02/19 17:13:37 client.SendTransactiononly replay-protected (EIP-155) transactions allowed over RPC
+	err = client.SendTransaction(context.Background(), signedTx)
+	if err != nil {
+		log.Fatal("client.SendTransaction", err)
+	}
+```
+
+## Swarm
+
+client_simulated
